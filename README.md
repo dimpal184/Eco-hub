@@ -28,3 +28,22 @@ Eco-Hub is a web platform designed to promote sustainable living and eco-friendl
 1. Clone the repository:  
    ```bash
    git clone https://github.com/dimpal184/Eco-Hub.git
+
+2.   Navigate to the project folder:
+
+cd Eco-Hub
+
+
+Install dependencies (if Node.js backend):
+
+npm install
+
+
+Configure your database connection in the backend configuration file.
+
+Start the application:
+
+npm start
+3.Contribution
+
+Contributions are welcome! Feel free to submit issues or pull requests to improve Eco-Hub.
