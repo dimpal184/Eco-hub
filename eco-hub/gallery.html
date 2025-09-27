@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eco Hub - Gallery</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    body { font-family: 'Poppins', sans-serif; }
+    body.dark-mode { background-color: #121212; color: #ffffff; }
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; }
+    .modal { opacity: 0; transform: scale(0.8); transition: 0.3s ease; pointer-events: none; }
+    .modal.show { opacity: 1; transform: scale(1); pointer-events: auto; }
+  </style>
+</head>
+<body class="bg-green-50 text-gray-800">
+<script>
+  if (localStorage.getItem("isLoggedIn") !== "true") {
+    window.location.href = "login.html";
+  }
+</script>
+
+<!-- Navbar -->
+<header class="bg-white shadow-md sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto flex justify-between items-center py-4 px-6">
+    <img src="https://images.squarespace-cdn.com/content/v1/6246b54bcfaa392a7111d868/80c6b848-e576-4122-9593-bca1418f9313/KROOP_210526_01_EcoHub_Logo_RZ.png?format=1500w" class="h-10" alt="Eco Hub Logo">
+    <nav class="space-x-4 text-sm md:text-base">
+      <a href="index.html" class="hover:text-green-700">Home</a>
+      <a href="events.html" class="hover:text-green-700">Events</a>
+      <a href="gallery.html" class="text-green-700 font-semibold underline">Gallery</a>
+      <a href="about.html" class="hover:text-green-700">About</a>
+      <a href="contact.html" class="hover:text-green-700">Contact</a>
+      <a href="quiz.html" id="quizLink" class="hover:text-green-700 hidden">Polls & Quizzes</a>
+      <button onclick="logout()" class="text-sm text-red-600 underline">Logout</button>
+    </nav>
+  </div>
+</header>
+
+<!-- Dark Mode Toggle -->
+<button onclick="toggleDarkMode()" class="fixed top-4 right-4 bg-green-700 text-white px-4 py-2 rounded-md z-50">
+  Toggle Dark Mode
+</button>
+
+<!-- Upload Section -->
+<section class="py-10 px-6 bg-white border-b" data-aos="fade-up">
+  <div class="max-w-4xl mx-auto text-center">
+    <h3 class="text-2xl font-bold text-green-800 mb-4">Upload Your Image & Story</h3>
+    <form id="uploadForm" class="space-y-4">
+      <input type="file" id="uploadImage" accept="image/*" required class="block mx-auto" />
+      <select id="category" class="w-full p-2 border rounded-md" required>
+        <option value="">Select Category</option>
+        <option value="clean-up">Clean-Up</option>
+        <option value="tree-plantation">Tree Plantation</option>
+        <option value="workshop">Workshops</option>
+      </select>
+      <textarea id="story" rows="3" placeholder="Write your story..." class="w-full border p-2 rounded-md" required></textarea>
+      <button type="submit" class="bg-green-700 text-white px-6 py-2 rounded-md">Upload</button>
+    </form>
+  </div>
+</section>
+
+<!-- Gallery Section -->
+<section class="py-16 px-6 bg-white" data-aos="fade-up">
+  <div class="max-w-7xl mx-auto text-center">
+    <h2 class="text-4xl font-bold text-green-800 mb-6">Our Gallery</h2>
+    <p class="text-gray-600 mb-12">Explore our sustainable campaigns and events.</p>
+    <div class="mb-8">
+      <button onclick="filterGallery('all')" class="px-6 py-2 bg-green-700 text-white rounded-md mr-2">All</button>
+      <button onclick="filterGallery('clean-up')" class="px-6 py-2 bg-green-500 text-white rounded-md mr-2">Clean-Up</button>
+      <button onclick="filterGallery('tree-plantation')" class="px-6 py-2 bg-green-500 text-white rounded-md mr-2">Tree Plantation</button>
+      <button onclick="filterGallery('workshop')" class="px-6 py-2 bg-green-500 text-white rounded-md">Workshops</button>
+    </div>
+    <div class="gallery-grid" id="gallery"></div>
+  </div>
+</section>
+
+<!-- Lightbox Modal -->
+<div id="lightbox" class="modal fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50">
+  <div class="bg-white p-4 rounded-md">
+    <img id="modalImage" class="w-full h-80 object-cover rounded">
+    <button onclick="closeModal()" class="mt-4 px-4 py-2 bg-red-600 text-white rounded">Close</button>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="bg-green-800 text-white py-10 mt-16">
+  <div class="max-w-6xl mx-auto grid md:grid-cols-4 gap-6 px-6 text-sm">
+    <div><h4 class="font-semibold text-lg mb-2">Eco Hub</h4><p>Uniting students for sustainability through campaigns and workshops.</p></div>
+    <div><h4 class="font-semibold text-lg mb-2">Quick Links</h4>
+      <ul class="space-y-1">
+        <li><a href="index.html" class="hover:underline">Home</a></li>
+        <li><a href="events.html" class="hover:underline">Events</a></li>
+        <li><a href="gallery.html" class="hover:underline">Gallery</a></li>
+        <li><a href="login.html" class="hover:underline">Login</a></li>
+      </ul>
+    </div>
+    <div><h4 class="font-semibold text-lg mb-2">Contact</h4><p>Email: ecohub@college.edu<br>Phone: +91 12345 67890</p></div>
+    <div><h4 class="font-semibold text-lg mb-2">Follow Us</h4><p>Instagram | Facebook | Twitter</p></div>
+  </div>
+  <div class="text-center text-sm mt-6">&copy; 2025 Eco Hub | Made with ❤️ for the planet</div>
+</footer>
+
+<script>
+  AOS.init();
+
+  function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+  }
+
+  function filterGallery(category) {
+    const images = document.querySelectorAll(".gallery-image");
+    images.forEach(img => {
+      img.style.display = category === "all" || img.classList.contains(category) ? "block" : "none";
+    });
+  }
+
+  function openModal(src) {
+    document.getElementById("modalImage").src = src;
+    document.getElementById("lightbox").classList.add("show");
+  }
+
+  function closeModal() {
+    document.getElementById("lightbox").classList.remove("show");
+  }
+
+  function logout() {
+    localStorage.removeItem("isLoggedIn");
+    window.location.href = "login.html";
+  }
+
+  if (localStorage.getItem("isLoggedIn") === "true") {
+    document.getElementById("quizLink").classList.remove("hidden");
+  }
+
+  // Store uploaded images in localStorage
+  document.getElementById("uploadForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+    const imgInput = document.getElementById("uploadImage");
+    const category = document.getElementById("category").value;
+    const story = document.getElementById("story").value;
+
+    const file = imgInput.files[0];
+    if (!file) return;
+
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      const galleryData = JSON.parse(localStorage.getItem("galleryData") || "[]");
+      galleryData.push({
+        src: event.target.result,
+        story,
+        category
+      });
+      localStorage.setItem("galleryData", JSON.stringify(galleryData));
+      displayGallery(); // reload
+    };
+    reader.readAsDataURL(file);
+  });
+
+  function displayGallery() {
+    const gallery = document.getElementById("gallery");
+    gallery.innerHTML = "";
+
+    const data = JSON.parse(localStorage.getItem("galleryData") || "[]");
+    data.forEach((item, index) => {
+      const imgBlock = document.createElement("div");
+      imgBlock.className = `gallery-image ${item.category}`;
+      imgBlock.setAttribute("data-aos", "zoom-in");
+      imgBlock.innerHTML = `
+        <img src="${item.src}" class="w-full h-48 object-cover rounded-md cursor-pointer" onclick="openModal('${item.src}')">
+        <p class="text-center mt-2">${item.story}</p>
+      `;
+      gallery.appendChild(imgBlock);
+    });
+  }
+
+  displayGallery();
+</script>
+</body>
+</html>

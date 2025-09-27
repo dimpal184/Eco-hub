@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Eco Hub - Promoting sustainability through student-led green initiatives." />
+  <title>Eco Hub - Welcome</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #e0f7e9 0%, #f7ffe0 100%);
+    }
+    .eco-gradient {
+      background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+    }
+    .eco-accent {
+      color: #f9b233;
+    }
+    .eco-btn {
+      background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+      color: #fff;
+      transition: background 0.3s;
+    }
+    .eco-btn:hover {
+      background: linear-gradient(90deg, #185a9d 0%, #43cea2 100%);
+    }
+  </style>
+</head>
+
+<body class="text-gray-800">
+  <!-- Navbar -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto flex justify-between items-center py-4 px-6">
+      <img src="https://images.squarespace-cdn.com/content/v1/6246b54bcfaa392a7111d868/80c6b848-e576-4122-9593-bca1418f9313/KROOP_210526_01_EcoHub_Logo_RZ.png?format=1500w" class="h-10" alt="Eco Hub Logo">
+      <nav class="flex space-x-6 text-base">
+        <a href="index.html" class="text-green-700 font-semibold hover:underline">Home</a>
+        <a href="register.html" class="text-blue-700 font-semibold hover:underline">Register</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="relative h-[80vh] flex items-center justify-center text-white text-center overflow-hidden">
+    <!-- Video Background -->
+    <video autoplay loop muted playsinline class="absolute w-auto min-w-full min-h-full max-w-none z-0 object-cover">
+      <source src="https://gehu.ac.in/assets/videos/gehu-background-video.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <!-- Dark overlay -->
+    <div class="absolute inset-0 eco-gradient opacity-80 z-10"></div>
+    <!-- Hero Content -->
+    <div class="relative z-20 px-6">
+      <h1 class="text-5xl md:text-6xl font-bold mb-4 drop-shadow-lg">Welcome to <span class="eco-accent">Eco Hub</span></h1>
+      <p class="text-lg md:text-2xl mb-6 drop-shadow">Your platform for a greener, cleaner, and more sustainable future.</p>
+      <a href="register.html" class="eco-btn px-8 py-3 rounded-full text-lg font-semibold shadow-lg">Join Us Now</a>
+    </div>
+  </section>
+
+  <!-- Website Review Section -->
+  <section class="py-16 bg-white px-6" data-aos="fade-up">
+    <div class="max-w-5xl mx-auto text-center">
+      <h2 class="text-4xl font-bold text-green-800 mb-4">About Eco Hub</h2>
+      <p class="text-gray-700 mb-8 max-w-3xl mx-auto text-lg">Eco Hub is a student-driven initiative dedicated to promoting sustainability and environmental awareness. Our platform empowers you to participate in green campaigns, join hands-on eco projects, and make a real difference in your community. Whether you’re passionate about tree planting, waste management, or simply want to learn more about living sustainably, Eco Hub is your go-to destination.</p>
+      <div class="grid md:grid-cols-2 gap-8 mt-10">
+        <div class="p-8 rounded-2xl shadow-lg bg-green-50 flex flex-col items-center">
+          <img src="https://tse2.mm.bing.net/th/id/OIP.Qsfx2iy4-0NMsOzqD9_mBQHaE8?rs=1&pid=ImgDetMain" alt="Planting" class="h-20 mb-4 rounded-full shadow">
+          <h3 class="font-bold text-2xl text-green-800 mb-2">Our Mission</h3>
+          <p class="text-gray-600">To inspire and enable students to take meaningful action for the environment through education, collaboration, and innovation.</p>
+        </div>
+        <div class="p-8 rounded-2xl shadow-lg bg-green-50 flex flex-col items-center">
+          <img src="https://i.ytimg.com/vi/QdGDrxpA3G4/maxresdefault.jpg" alt="Eco Projects" class="h-20 mb-4 rounded-full shadow">
+          <h3 class="font-bold text-2xl text-green-800 mb-2">What We Offer</h3>
+          <ul class="text-gray-600 text-left list-disc list-inside">
+            <li>Eco-campaigns and drives</li>
+            <li>Workshops and awareness sessions</li>
+            <li>Collaborative sustainability projects</li>
+            <li>Polls, quizzes, and interactive content</li>
+            <li>Community support and volunteering</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Registration Highlight Section -->
+  <section class="py-16 eco-gradient text-white px-6" data-aos="fade-up">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-4xl font-bold mb-4">Become a Member</h2>
+      <p class="mb-8 text-lg">Register now to unlock exclusive access to events, resources, and a vibrant community of eco-enthusiasts. Take the first step towards making a positive impact!</p>
+      <a href="register.html" class="eco-btn px-10 py-4 rounded-full text-xl font-semibold shadow-lg">Register Today</a>
+      <div class="mt-10 grid md:grid-cols-2 gap-8">
+        <div class="bg-white bg-opacity-20 rounded-2xl p-6 shadow-lg">
+          <h3 class="font-bold text-2xl mb-2">Why Register?</h3>
+          <ul class="text-lg list-disc list-inside text-left mx-auto max-w-xs">
+            <li>Participate in exclusive events</li>
+            <li>Access member-only resources</li>
+            <li>Connect with like-minded peers</li>
+            <li>Track your green journey</li>
+          </ul>
+        </div>
+        <div class="bg-white bg-opacity-20 rounded-2xl p-6 shadow-lg">
+          <h3 class="font-bold text-2xl mb-2">How to Register?</h3>
+          <ol class="text-lg list-decimal list-inside text-left mx-auto max-w-xs">
+            <li>Click the Register button</li>
+            <li>Fill in your details</li>
+            <li>Start your eco journey!</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-green-900 text-white py-6 mt-8">
+    <div class="text-center text-sm">&copy; 2025 Eco Hub | Made with <span class="eco-accent">❤</span> for the planet</div>
+  </footer>
+
+  <script>
+    AOS.init();
+  </script>
+</body>
+
+</html>

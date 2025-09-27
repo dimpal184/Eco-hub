@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About Us - Eco Hub</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-green-50 text-gray-800"><script>
+    if (localStorage.getItem("isLoggedIn") !== "true") {
+      window.location.href = "login.html";
+    }
+  </script>
+
+  <!-- Navbar -->
+  <header class="bg-white shadow-md sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto flex justify-between items-center py-4 px-6">
+      <img src=" https://images.squarespace-cdn.com/content/v1/6246b54bcfaa392a7111d868/80c6b848-e576-4122-9593-bca1418f9313/KROOP_210526_01_EcoHub_Logo_RZ.png?format=1500w"class="h-10" alt ="Eco Hub Logo">
+      <nav class="space-x-6 text-sm md:text-base">
+        <a href="index.html" class="hover:text-green-700">Home</a>
+        <a href="events.html" class="hover:text-green-700">Events</a>
+        <a href="gallery.html" class="hover:text-green-700">Gallery</a>
+        <a href="about.html" class="text-green-700 font-semibold underline">About </a>
+         <a href="contact.html" class="hover:text-green-700">Contact</a>
+        <a href="login.html" class="hover:text-green-700">Login</a>
+        <a href="register.html" class="hover:text-green-700">Register</a>
+<button onclick="logout()" class="text-sm text-red-600 underline">Logout</button>
+
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="bg-green-100 py-16" data-aos="fade-up">
+    <div class="max-w-5xl mx-auto text-center px-6">
+      <h2 class="text-4xl font-bold text-green-800 mb-4">Who We Are</h2>
+      <p class="text-lg text-gray-700">Eco Hub is the official environmental club of our college, striving to create awareness and action for a sustainable tomorrow. 🌱</p>
+    </div>
+  </section>
+
+  <!-- Mission Section -->
+  <section class="py-12 bg-white" data-aos="fade-right">
+    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
+      <img src="https://th.bing.com/th/id/R.4a10cc5456ddb0170e461fc60b002a98?rik=E49HgzWnOvklZw&riu=http%3a%2f%2fbeddingnewsnow.com%2fwp-content%2fuploads%2f2024%2f06%2fphotos.png&ehk=Ko4PmfmN7jF%2baqhjYS9ihVYeD80x8yXuvld9vSOUIo8%3d&risl=&pid=ImgRaw&r=0" alt="Eco Mission" class="rounded-lg shadow-lg">
+      <div>
+        <h3 class="text-3xl font-bold text-green-700 mb-4">Our Mission</h3>
+        <p class="text-gray-700 text-lg leading-relaxed">To foster eco-conscious thinking and behavior among students, promote green initiatives, and empower youth to take positive actions towards environmental sustainability.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Achievements Section -->
+  <section class="py-16 bg-green-50" data-aos="fade-left">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <h3 class="text-3xl font-bold text-green-800 mb-10">Milestones & Achievements</h3>
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition">
+          <h4 class="text-xl font-semibold text-green-600 mb-2">500+ Trees Planted</h4>
+          <p>We’ve organized over 10 tree plantation drives in and around our campus.</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition">
+          <h4 class="text-xl font-semibold text-green-600 mb-2">20+ Clean-Up Events</h4>
+          <p>From riverbanks to neighborhoods, we take pride in keeping our surroundings clean.</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md hover:shadow-xl transition">
+          <h4 class="text-xl font-semibold text-green-600 mb-2">Awareness Programs</h4>
+          <p>We’ve reached 1000+ students through workshops, seminars, and campaigns.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section class="py-16 bg-white" data-aos="zoom-in">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <h3 class="text-3xl font-bold text-green-800 mb-10">Meet Our Core Team</h3>
+      <p class="text-gray-600 mb-10 max-w-2xl mx-auto">This project is proudly created by a passionate team of four dedicated students who believe in the power of code and climate action.</p>
+      <div class="grid md:grid-cols-4 gap-8">
+        <div class="bg-green-100 p-6 rounded-lg hover:shadow-lg">
+          <img src="https://cdn.pixabay.com/photo/2023/06/01/14/11/ai-generated-8033671_1280.png" class="w-24 h-24 mx-auto rounded-full mb-4" alt="Member 1">
+          <h4 class="text-xl font-semibold text-green-700">Darshan Singh</h4>
+          <p class="text-sm text-gray-700"> Frontend Developer</p>
+        </div>
+        <div class="bg-green-100 p-6 rounded-lg hover:shadow-lg">
+          <img src="https://wallpaperaccess.com/full/1672449.jpg" class="w-24 h-24 mx-auto rounded-full mb-4"alt="Member 2">
+          <h4 class="text-xl font-semibold text-green-700">Abhay Singh</h4>
+          <p class="text-sm text-gray-700">Frontend Specialist</p>
+        </div>
+        <div class="bg-green-100 p-6 rounded-lg hover:shadow-lg">
+          <img src="https://i.pinimg.com/originals/be/ac/96/beac96b8e13d2198fd4bb1d5ef56cdcf.jpg" class="w-24 h-24 mx-auto rounded-full mb-4" alt="Member 3">
+          <h4 class="text-xl font-semibold text-green-700">Dimple Bashera</h4>
+          <p class="text-sm text-gray-700">Backend Developer</p>
+        </div>
+        <div class="bg-green-100 p-6 rounded-lg hover:shadow-lg">
+          <img src="https://pics.craiyon.com/2023-11-15/NFfo8Fq5SC-QlFZzS4ge3Q.webp" class="w-24 h-24 mx-auto rounded-full mb-4" alt="Member 4">
+          <h4 class="text-xl font-semibold text-green-700">Bhanu Bhaskar</h4>
+          <p class="text-sm text-gray-700">Backend and Tester</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-green-800 text-white py-10 mt-10">
+    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-4 gap-8 text-sm">
+      <div>
+        <h4 class="font-semibold text-lg mb-2">Eco Hub</h4>
+        <p>Uniting students for sustainability through campaigns, workshops, and innovation.</p>
+      </div>
+      <div>
+        <h4 class="font-semibold text-lg mb-2">Quick Links</h4>
+        <ul class="space-y-1">
+          <li><a href="index.html" class="hover:underline">Home</a></li>
+          <li><a href="events.html" class="hover:underline">Events</a></li>
+          <li><a href="gallery.html" class="hover:underline">Gallery</a></li>
+          <a href="login.html" class="hover:text-green-700">Login</a>
+          <li><a href="about.html" class="hover:underline">About</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="font-semibold text-lg mb-2">Contact</h4>
+        <p>Email: ecohub@college.edu<br>Phone: +91 12345 67890</p>
+      </div>
+      <div>
+        <h4 class="font-semibold text-lg mb-2">Follow Us</h4>
+        <p>Instagram | Facebook | Twitter</p>
+      </div>
+    </div>
+    <div class="text-center text-sm mt-6">&copy; 2025 Eco Hub | Made with ❤️ by Team Eco Hub</div>
+  </footer>
+
+  <script>
+    AOS.init();
+  </script>
+<script>
+  function logout() {
+    localStorage.removeItem("isLoggedIn");
+    window.location.href = "login.html";
+  }
+</script>
+
+</body>
+</html>

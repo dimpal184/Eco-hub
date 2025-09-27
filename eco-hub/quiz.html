@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Eco Hub - Polls & Quizzes</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .bar {
+      height: 20px;
+      background-color: #34d399;
+      margin-bottom: 5px;
+      color: white;
+      padding-left: 5px;
+      line-height: 20px;
+      border-radius: 5px;
+    }
+
+    .progress-container {
+      width: 100%;
+      background-color: #e5e7eb;
+      border-radius: 0.375rem;
+      overflow: hidden;
+      height: 20px;
+      margin-top: 1rem;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background-color: #34d399;
+      width: 0;
+      text-align: center;
+      color: white;
+      line-height: 20px;
+      transition: width 0.5s;
+    }
+  </style>
+</head>
+
+<body class="bg-green-50 min-h-screen">
+  <script>
+    if (localStorage.getItem("isLoggedIn") !== "true") {
+      window.location.href = "login.html";
+    }
+  </script>
+
+  <div class="max-w-3xl mx-auto py-10 px-4">
+    <h1 class="text-3xl font-bold text-green-800 mb-6">🌱 Eco Quiz (Random Questions)</h1>
+    <form id="quizForm" class="space-y-6"></form>
+    <div class="progress-container">
+      <div id="progressBar" class="progress-bar">0%</div>
+    </div>
+    <p id="quizResult" class="mt-6 font-bold text-xl text-green-700"></p>
+
+    <!-- Poll Section -->
+    <div class="mt-12">
+      <h2 class="text-2xl font-bold text-green-800 mb-4">📊 Quick Poll</h2>
+      <p class="mb-2">What should be our next campaign?</p>
+      <form id="pollForm" class="space-y-4">
+        <label><input type="radio" name="poll" value="Clean-Up Drive"> Clean-Up Drive</label><br>
+        <label><input type="radio" name="poll" value="Tree Plantation"> Tree Plantation</label><br>
+        <label><input type="radio" name="poll" value="Plastic-Free Week"> Plastic-Free Week</label><br>
+        <label><input type="radio" name="poll" value="E-Waste Collection"> E-Waste Collection</label><br>
+
+        <button type="submit"
+          class="mt-4 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Submit Poll</button>
+      </form>
+
+      <p id="pollResult" class="mt-4 font-medium text-green-700"></p>
+
+      <div id="pollChart" class="mt-6 space-y-2 hidden">
+        <div><span>Clean-Up Drive</span>
+          <div id="bar1" class="bar w-0"></div>
+        </div>
+        <div><span>Tree Plantation</span>
+          <div id="bar2" class="bar w-0"></div>
+        </div>
+        <div><span>Plastic-Free Week</span>
+          <div id="bar3" class="bar w-0"></div>
+        </div>
+        <div><span>E-Waste Collection</span>
+          <div id="bar4" class="bar w-0"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const allQuestions = [
+      {
+        question: "What is the most eco-friendly transport?",
+        options: ["Bicycle", "Car", "Bus", "Motorbike"],
+        answer: "Bicycle",
+        feedback: { correct: "✅ Correct! Bicycles are emission-free and promote health.", wrong: "❌ Incorrect. Bicycles are the most eco-friendly." }
+      },
+      {
+        question: "Which item is not recyclable?",
+        options: ["Glass Bottle", "Plastic Bag", "Newspaper", "Aluminum Can"],
+        answer: "Plastic Bag",
+        feedback: { correct: "✅ Correct! Plastic bags are difficult to recycle.", wrong: "❌ Incorrect. Plastic bags are not recyclable." }
+      },
+      {
+        question: "Which energy source is renewable?",
+        options: ["Solar", "Coal", "Petrol", "Diesel"],
+        answer: "Solar",
+        feedback: { correct: "✅ Right! Solar energy is a clean renewable source.", wrong: "❌ Nope. Solar is the renewable one!" }
+      },
+      {
+        question: "What does 3R stand for?",
+        options: ["Reduce, Reuse, Recycle", "Recycle, Repeat, Return", "React, Reuse, Restore", "Renew, Recycle, Refuse"],
+        answer: "Reduce, Reuse, Recycle",
+        feedback: { correct: "✅ Spot on! That's the golden mantra.", wrong: "❌ Wrong. It's Reduce, Reuse, Recycle." }
+      },
+      {
+        question: "Which gas causes global warming?",
+        options: ["CO2", "O2", "N2", "H2"],
+        answer: "CO2",
+        feedback: { correct: "✅ Correct! CO2 traps heat in the atmosphere.", wrong: "❌ Not quite. CO2 is the main culprit." }
+      },
+      {
+        question: "Which of the following is biodegradable?",
+        options: ["Plastic", "Glass", "Paper", "Metal"],
+        answer: "Paper",
+        feedback: { correct: "✅ Correct! Paper decomposes naturally.", wrong: "❌ Incorrect. Paper is biodegradable." }
+      },
+      {
+        question: "What is composting?",
+        options: ["Burning waste", "Mixing waste with chemicals", "Natural breakdown of organic material", "Plastic melting"],
+        answer: "Natural breakdown of organic material",
+        feedback: { correct: "✅ Exactly! Composting is nature's recycling.", wrong: "❌ Nope. It's natural breakdown of organic material." }
+      },
+      {
+        question: "Which product is reusable?",
+        options: ["Paper Plate", "Plastic Spoon", "Cloth Bag", "Styrofoam Cup"],
+        answer: "Cloth Bag",
+        feedback: { correct: "✅ Right! Cloth bags are eco-friendly and reusable.", wrong: "❌ Wrong. Cloth bags are the best reusable option." }
+      },
+      {
+        question: "Which of these contributes to air pollution?",
+        options: ["Car emissions", "Tree planting", "Cycling", "Walking"],
+        answer: "Car emissions",
+        feedback: { correct: "✅ Correct! Vehicles release harmful gases.", wrong: "❌ Incorrect. Car emissions pollute the air." }
+      },
+      {
+        question: "How can you save water at home?",
+        options: ["Leave tap open", "Watering plants daily", "Fixing leaks", "Use more detergent"],
+        answer: "Fixing leaks",
+        feedback: { correct: "✅ Yes! Fixing leaks can save gallons of water.", wrong: "❌ Not really. Fixing leaks is the key!" }
+      }
+    ];
+
+    const quizContainer = document.getElementById("quizForm");
+    const quizResult = document.getElementById("quizResult");
+    const progressBar = document.getElementById("progressBar");
+
+    const selectedQuestions = allQuestions.sort(() => Math.random() - 0.5).slice(0, 10);
+
+    selectedQuestions.forEach((q, index) => {
+      const id = `q${index + 1}`;
+      const div = document.createElement("div");
+      let optionsHTML = q.options.map(opt => `<option>${opt}</option>`).join("");
+
+      div.innerHTML = `
+        <label class="block mb-2 font-semibold">${index + 1}. ${q.question}</label>
+        <select name="${id}" required class="w-full p-2 border rounded" onchange="updateProgress()">
+          <option value="">Select</option>
+          ${optionsHTML}
+        </select>
+        <p class="text-sm mt-1 text-green-600" id="feedback${index + 1}"></p>
+      `;
+      quizContainer.appendChild(div);
+    });
+
+    quizContainer.innerHTML += `
+      <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Submit Quiz</button>
+    `;
+
+    function updateProgress() {
+      const total = selectedQuestions.length;
+      const answered = Array.from(document.querySelectorAll("select")).filter(s => s.value).length;
+      const percent = Math.floor((answered / total) * 100);
+      progressBar.style.width = percent + "%";
+      progressBar.textContent = percent + "%";
+    }
+
+    quizContainer.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const data = new FormData(e.target);
+      let score = 0;
+
+      selectedQuestions.forEach((q, index) => {
+        const id = `q${index + 1}`;
+        const userAnswer = data.get(id);
+        const feedbackEl = document.getElementById(`feedback${index + 1}`);
+
+        if (userAnswer === q.answer) {
+          score++;
+          feedbackEl.innerText = q.feedback.correct;
+        } else {
+          feedbackEl.innerText = q.feedback.wrong;
+        }
+      });
+
+      const message = score >= 8 ? "🌟 Excellent!" : score >= 5 ? "👍 Good job!" : "📚 Keep learning!";
+      quizResult.innerText = `You scored ${score}/10! ${message}`;
+    });
+  </script>
+
+  <script>
+    const pollCounts = JSON.parse(localStorage.getItem("pollCounts")) || {
+      "Clean-Up Drive": 0,
+      "Tree Plantation": 0,
+      "Plastic-Free Week": 0,
+      "E-Waste Collection": 0
+    };
+
+    let pollVoted = localStorage.getItem("pollVoted") === "true";
+
+    document.getElementById("pollForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (pollVoted) {
+        document.getElementById("pollResult").innerText = "You have already voted! ✅";
+        return;
+      }
+
+      const selected = document.querySelector('input[name="poll"]:checked');
+      if (!selected) {
+        document.getElementById("pollResult").innerText = "Please select an option before submitting.";
+        return;
+      }
+
+      const value = selected.value;
+      pollCounts[value]++;
+      localStorage.setItem("pollCounts", JSON.stringify(pollCounts));
+      localStorage.setItem("pollVoted", "true");
+      pollVoted = true;
+
+      document.getElementById("pollResult").innerText = `Thanks! You voted for \"${value}\".`;
+      showPollResults();
+    });
+
+    function showPollResults() {
+      const totalVotes = Object.values(pollCounts).reduce((a, b) => a + b, 0);
+      if (totalVotes === 0) return;
+
+      document.getElementById("pollChart").classList.remove("hidden");
+
+      const percentages = {
+        "Clean-Up Drive": (pollCounts["Clean-Up Drive"] / totalVotes) * 100,
+        "Tree Plantation": (pollCounts["Tree Plantation"] / totalVotes) * 100,
+        "Plastic-Free Week": (pollCounts["Plastic-Free Week"] / totalVotes) * 100,
+        "E-Waste Collection": (pollCounts["E-Waste Collection"] / totalVotes) * 100
+      };
+
+      document.getElementById("bar1").style.width = `${percentages["Clean-Up Drive"]}%`;
+      document.getElementById("bar1").innerText = `${pollCounts["Clean-Up Drive"]} votes`;
+
+      document.getElementById("bar2").style.width = `${percentages["Tree Plantation"]}%`;
+      document.getElementById("bar2").innerText = `${pollCounts["Tree Plantation"]} votes`;
+
+      document.getElementById("bar3").style.width = `${percentages["Plastic-Free Week"]}%`;
+      document.getElementById("bar3").innerText = `${pollCounts["Plastic-Free Week"]} votes`;
+
+      document.getElementById("bar4").style.width = `${percentages["E-Waste Collection"]}%`;
+      document.getElementById("bar4").innerText = `${pollCounts["E-Waste Collection"]} votes`;
+    }
+
+    if (pollVoted) showPollResults();
+  </script>
+
+  <script>
+    function logout() {
+      localStorage.removeItem("isLoggedIn");
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+
+</html>
