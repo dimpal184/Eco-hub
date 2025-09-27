@@ -10,7 +10,8 @@ Eco-Hub is a web platform designed to promote sustainable living and eco-friendl
 - **Activity Tracking** – Log eco-friendly actions like recycling, energy saving, and more.  
 - **Dashboard & Analytics** – Visualize your impact with charts and progress reports.  
 - **Community Challenges** – Participate in group activities to promote sustainability.  
-- **Responsive Design** – Works seamlessly on desktop and mobile devices.  
+- **Responsive Design** – Works seamlessly on desktop .
+- **Eco related quiz**  -environment related quiz,random question to interact with users.
 
 ---
 
